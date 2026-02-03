@@ -14,16 +14,19 @@
       justify-content: center;
       font-family: Arial, sans-serif;
       overflow: hidden;
+      position: relative; /* Floating hearts ke liye zaroori hai */
     }
 
     .container {
       text-align: center;
       color: white;
+      z-index: 10; /* Buttons hearts ke upar rahein */
     }
 
     h1 {
       margin-bottom: 30px;
       font-size: 36px;
+      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.2);
     }
 
     button {
@@ -33,6 +36,7 @@
       border: none;
       border-radius: 10px;
       cursor: pointer;
+      transition: 0.3s;
     }
 
     #yes {
@@ -44,6 +48,31 @@
       background: #ef4444;
       color: white;
       position: absolute;
+    }
+
+    /* Floating Heart Styling */
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 20px;
+      user-select: none;
+      pointer-events: none;
+      animation: moveUp 5s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes moveUp {
+      0% {
+        transform: translateY(100vh) scale(0);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.5);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -60,16 +89,34 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
 
-    // NO button bhaagne ka logic
+    // Floating Hearts Create karne ka function
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "❤️"; // Aap yaha Dusre emojis bhi use kar sakte hain
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = Math.random() * 3 + 2 + "s"; // 2 se 5 seconds ki random speed
+      
+      document.body.appendChild(heart);
+
+      // Animation khatam hone ke baad heart remove kar dena
+      setTimeout(() => {
+        heart.remove();
+      }, 5000);
+    }
+
+    // Har 300ms mein ek naya heart banega
+    setInterval(createHeart, 300);
+
+    // NO button logic
     noBtn.addEventListener("mouseover", () => {
       const x = Math.random() * (window.innerWidth - 120);
       const y = Math.random() * (window.innerHeight - 60);
-
       noBtn.style.left = x + "px";
       noBtn.style.top = y + "px";
     });
 
-    // YES click par final cute ending
+    // YES click logic
     yesBtn.addEventListener("click", () => {
       document.body.innerHTML = `
         <div style="
@@ -84,13 +131,11 @@
           text-align:center;
           padding:20px;
         ">
-
           <img
             src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
             alt="smile gif"
             style="width:220px;border-radius:20px;margin-bottom:25px;"
           >
-
           <div style="font-size:34px;line-height:1.5;">
             Thanks 😄<br>
             Congratulations 🎉<br>
@@ -98,7 +143,6 @@
               Your choice is outstanding 💎
             </span>
           </div>
-
         </div>
       `;
     });
