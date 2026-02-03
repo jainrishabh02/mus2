@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Yes or No 😄</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #0b0b0b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: white;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+      font-size: 36px;
+    }
+
+    button {
+      font-size: 22px;
+      padding: 12px 35px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    #yes {
+      background: #22c55e;
+      color: white;
+    }
+
+    #no {
+      background: #ef4444;
+      color: white;
+      position: absolute;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Hey! Muskan Will you be My Valentine? 😌</h1>
+    <button id="yes">YES</button>
+    <button id="no">NO</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+
+    // NO button bhaagne ka logic
+    noBtn.addEventListener("mouseover", () => {
+      const x = Math.random() * (window.innerWidth - 120);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    });
+
+    // YES click par final cute ending
+    yesBtn.addEventListener("click", () => {
+      document.body.innerHTML = `
+        <div style="
+          height:100vh;
+          display:flex;
+          flex-direction:column;
+          align-items:center;
+          justify-content:center;
+          background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+          color:white;
+          font-family:Arial;
+          text-align:center;
+          padding:20px;
+        ">
+
+          <img
+            src="https://media.giphy.com/media/26ufdipQqU2lhNA4g/giphy.gif"
+            alt="smile gif"
+            style="width:220px;border-radius:20px;margin-bottom:25px;"
+          >
+
+          <div style="font-size:34px;line-height:1.5;">
+            Thanks 😄<br>
+            Congratulations 🎉<br>
+            <span style="color:#ffd700;">
+              Your choice is outstanding 💎
+            </span>
+          </div>
+
+        </div>
+      `;
+    });
+  </script>
+
+</body>
+</html>
